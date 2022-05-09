@@ -13,5 +13,10 @@ This repo contains a `ruby` library, wrapping some of the basic azure-cli comman
 
 Wraps the [az boards work-item show](https://docs.microsoft.com/en-us/cli/azure/boards/work-item?view=azure-cli-latest#az-boards-work-item-show) command. 
 
-Useful for querying work items on the Az boards for reporting purposes.
+Useful for gathering details on work items on the Az boards for reporting purposes.
 
+### Query
+
+Wraps the [az boards query](https://docs.microsoft.com/en-us/cli/azure/boards?view=azure-cli-latest#az-boards-query) command. 
+
+Useful for querying work items on the Az boards for reporting purposes.
