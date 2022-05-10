@@ -1,4 +1,5 @@
 require 'json'
+require 'safe_shell'
 
 class Query
 
