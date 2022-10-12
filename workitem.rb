@@ -5,6 +5,7 @@ class WorkItem
 
     attr_reader :title
     attr_reader :createdBy
+    attr_reader :resolvedBy
     attr_reader :children
     attr_reader :parent
     attr_reader :tags
@@ -23,6 +24,7 @@ class WorkItem
         @createdDate = get_createdDate
         @title = get_title
         @createdBy = get_createdby
+        @resolvedBy = get_resolvedby
         @children = get_relations("Child")
         @parent = get_relations("Parent")
         @tags = get_tags
@@ -56,12 +58,20 @@ class WorkItem
         [@datahash["fields"]["System.CreatedBy"]["displayName"], @datahash["fields"]["System.CreatedBy"]["uniqueName"]]
     end
 
+    def get_resolvedby
+        @datahash["fields"]["Microsoft.VSTS.Common.ResolvedBy"]["uniqueName"]
+    end
+
     def get_createdDate
         @datahash["fields"]["System.CreatedDate"]
     end
 
     def get_relations(relationship)
         relations = @datahash["relations"]
+        if relations.nil?
+            return ''
+        end
+
         relationship_array = Array.new
         relations.each do |relation|    
             if relation["attributes"]["name"].eql? relationship
@@ -75,7 +85,7 @@ class WorkItem
     end 
 
     def build_url
-        File.join @org, get_project, '_workitems', 'edit', @item_id
+        File.join @org, get_project, '_workitems', 'edit', @item_id.to_s
     end
 
     private
