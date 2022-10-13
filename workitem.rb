@@ -59,7 +59,11 @@ class WorkItem
     end
 
     def get_resolvedby
-        @datahash["fields"]["Microsoft.VSTS.Common.ResolvedBy"]["uniqueName"]
+        if @datahash["fields"]["Microsoft.VSTS.Common.ResolvedBy"].nil? 
+           return ' '
+        end
+
+         @datahash["fields"]["Microsoft.VSTS.Common.ResolvedBy"]["uniqueName"]
     end
 
     def get_createdDate
