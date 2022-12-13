@@ -6,6 +6,7 @@ class WorkItem
     attr_reader :title
     attr_reader :createdBy
     attr_reader :resolvedBy
+    attr_reader :resolvedDate
     attr_reader :children
     attr_reader :parent
     attr_reader :tags
@@ -25,6 +26,7 @@ class WorkItem
         @title = get_title
         @createdBy = get_createdby
         @resolvedBy = get_resolvedby
+        @resolvedDate = get_resolvedDate
         @children = get_relations("Child")
         @parent = get_relations("Parent")
         @tags = get_tags
@@ -36,6 +38,10 @@ class WorkItem
 
     def get_title
         @datahash["fields"]["System.Title"]
+    end
+
+    def get_itemid
+        @item_id
     end
 
     def get_type
@@ -64,6 +70,15 @@ class WorkItem
         end
 
          @datahash["fields"]["Microsoft.VSTS.Common.ResolvedBy"]["uniqueName"]
+    end
+
+
+    def get_resolvedDate
+        if @datahash["fields"]["Microsoft.VSTS.Common.ResolvedDate"].nil? 
+           return ' '
+        end
+
+         @datahash["fields"]["Microsoft.VSTS.Common.ResolvedDate"]
     end
 
     def get_createdDate
